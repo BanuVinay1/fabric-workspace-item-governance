@@ -1,0 +1,23 @@
+name: Fabric Workspace Governance
+
+on:
+  schedule:
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Run governance checks
+        env:
+          FABRIC_TOKEN: ${{ secrets.FABRIC_TOKEN }}
+        run: |
+          ./scripts/main.sh

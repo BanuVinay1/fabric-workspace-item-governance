@@ -1,0 +1,9 @@
+{
+  "allowedCapacityIds": [
+    "f5ea6bca-4613-4f7b-8c9f-a391ee891700"
+  ],
+  "disallowedItemTypes": [
+    "Warehouse"
+  ],
+  "maxLakehouses": 2
+}
