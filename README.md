@@ -10,5 +10,5 @@ In large tenants, orphaned workspaces and high-cost Fabric items sush as Warehou
 - High-risk item types
 
 ## how it runs
--- GitHub actions (shceduled and manual)
--- SP authentication
+- GitHub actions (shceduled and manual)
+- SP authentication
