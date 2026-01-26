@@ -1,4 +1,4 @@
-name: Fabric Workspace Governance
+name: Fabric Workspace Item Governance
 
 on:
   schedule:
