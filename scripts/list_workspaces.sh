@@ -1,10 +1,25 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-TOKEN="$1"
+# 1. Validate token
+if [[ -z "${FABRIC_TOKEN:-}" ]]; then
+  echo "ERROR: FABRIC_TOKEN is not set"
+  exit 1
+fi
 
-curl -s \
-  -H "Authorization: Bearer $TOKEN" \
+# 2. Call Fabric API
+RESPONSE=$(curl -s \
+  -H "Authorization: Bearer ${FABRIC_TOKEN}" \
   -H "Content-Type: application/json" \
-  https://api.fabric.microsoft.com/v1/workspaces \
-| jq '[.value[] | select(.type != "Personal")]'
+  https://api.fabric.microsoft.com/v1/workspaces)
+
+# 3. Defensive check: did we actually get workspaces?
+if ! echo "$RESPONSE" | jq -e '.value' >/dev/null; then
+  echo "ERROR: Unexpected response from Fabric API"
+  echo "$RESPONSE"
+  exit 1
+fi
+
+# 4. Emit non-personal workspaces only
+echo "$RESPONSE" \
+  | jq '[.value[] | select(.type != "Personal")]'
