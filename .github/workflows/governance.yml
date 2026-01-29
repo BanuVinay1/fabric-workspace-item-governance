@@ -18,6 +18,9 @@ jobs:
 
       - name: Run governance checks
         env:
-          FABRIC_TOKEN: ${{ secrets.FABRIC_TOKEN }}
+          FABRIC_TENANT_ID: ${{ secrets.FABRIC_TENANT_ID }}
+          FABRIC_CLIENT_ID: ${{ secrets.FABRIC_CLIENT_ID }}
+          FABRIC_CLIENT_SECRET: ${{ secrets.FABRIC_CLIENT_SECRET }}
+          FABRIC_SCOPE: ${{ secrets.FABRIC_SCOPE }}
         run: |
           ./scripts/main.sh
